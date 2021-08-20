@@ -1,0 +1,96 @@
+<html>
+  <body >
+  <H1 style="text-align:center;">Products status under ALM system</H1>
+
+  <H2 style="text-align:center;">All Products status</H2>
+  <table style="margin-left:auto;margin-right:auto;vertical-align: middle;border: 1px solid black;";>
+        <TR>
+            {% for heading in h_headings_product_table %}
+            <TH style="text-align:center;padding: 12px 12px 12px 12px; border: 1px solid black;">{{ heading }}</TH>
+            {% endfor %}
+        </TR>
+        {% for row in h_product_table_data %}
+        <TR>
+            {% for cell in row %}
+            {% if cell == True %}
+            <td style="background-color:#00FF00; text-align:center; border: 1px solid black;">Pass</td>
+            {% elif cell == False %}
+<!--            <td style="background-color:#FF0000; text-align:center; border: 1px solid black;" title={{ h_failure_msg }}>Fail</td>-->
+            <td style="background-color:#FF4040; text-align:center; border: 1px solid black;">
+            <div title="{{ h_failure_msg }}">Fail</div>
+            </td>
+            {% else %}
+            <td style="text-align:center; border: 1px solid black;">{{ cell }}</td>
+            {% endif %}
+
+            {% endfor %}
+        </TR>
+        {% endfor %}
+    </table>
+
+<!--  {% set count = 0 %}-->
+  {% for headings in h_headings_container_table %}
+  {% set outer_loop = loop %}}
+<!--  <H2 style="text-align:center;">Value of count is {{ count }} </H2>-->
+<!--  <H2 style="text-align:center;"> {{ h_product_table_data[count][0] }} Product status</H2>-->
+  <H2 style="text-align:center;"> {{ h_product_table_data[loop.index - 1][0] }} Product status</H2>
+  <table style="margin-left:auto;margin-right:auto;vertical-align: middle;border: 1px solid black;">
+        <TR>
+
+            {% for heading in headings %}
+            <TH style="text-align:center;padding: 12px 12px 12px 12px; border: 1px solid black;">{{ heading }}</TH>
+            {% endfor %}
+        </TR>
+        {% for container_status in h_test_status[loop.index - 1] %}
+        <TR>
+            {% for cell in container_status %}
+            {% if cell == "pass" %}
+            <td style="background-color:#00FF00; text-align:center; border: 1px solid black;">Pass</td>
+            {% elif cell == "fail" %}
+            <td style="background-color:#FF4040; text-align:center; border: 1px solid black;">
+                <div title="{{ h_failure_msg }}">Fail</div>
+            </td>
+            {% elif cell == "par_fail" %}
+            <td style="background-color:#FFFF25; text-align:center; border: 1px solid black;">
+                <div title="{{ h_failure_msg }}">Fail</div>
+            </td>
+            {% elif cell == "" %}
+            <td>    </td>
+            {% else %}
+            <td style="text-align:center; border: 1px solid black;">{{ cell }}</td>
+            {% endif %}
+            {% endfor %}
+        </TR>
+        {% endfor %}
+    </table>
+<!--  <H2 style="text-align:center;">Value of count is {{ count }} </H2>-->
+<!--  {% set count = count + 1 %}-->
+
+  {% endfor %}
+
+  <H2 style="text-align:center;">Deployment Environment status</H2>
+  <table style="margin-left:auto;margin-right:auto;vertical-align: middle;border: 1px solid black;";>
+        <TR>
+            {% for heading in h_headings_env_table %}
+            <TH style="text-align:center;padding: 12px 12px 12px 12px; border: 1px solid black;">{{ heading }}</TH>
+            {% endfor %}
+        </TR>
+        {% for row in h_env_table_data %}
+        <TR>
+            {% for cell in row %}
+            {% if cell == True %}
+            <td style="background-color:#00FF00; text-align:center; border: 1px solid black;">Pass</td>
+            {% elif cell == False %}
+            <td style="background-color:#FF4040; text-align:center; border: 1px solid black;">
+                <div title="{{ h_failure_msg }}">Fail</div>
+            </td>
+            {% else %}
+            <td style="text-align:center; border: 1px solid black;">{{ cell }}</td>
+            {% endif %}
+
+            {% endfor %}
+        </TR>
+        {% endfor %}
+    </table>
+</body>
+</html>
