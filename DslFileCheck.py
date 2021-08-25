@@ -1,3 +1,5 @@
+#!usr/bin/python
+
 import os
 
 
@@ -145,7 +147,9 @@ class DslFileCheck:
                             break
 
     # Checks for relations in Containers under each Product.
-    # Returns Dictionary container_status_dict having the left Containers as KEY and right Containers as VALUE.
+    # Returns Dictionary container_status_dict having Containers as KEY and their respective status as VALUE.
+    # Updates Class variable Dictionary cont_relation_dict having the left Containers as KEY and right Containers as
+    # VALUE.
     # Left and Right of the special characters -> between each relationship.
     def dsl_file_cont_relation(self):
         container_status_dict = {key: None for key in self.cont_list_complete}
